@@ -3,275 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dek70 Planner - วางแผนเตรียมตัวสอบ</title>
+    <title>Dek70 Planner - หน้าแรก</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #b991bf;
-            color: #333;
-            display: flex;
-            min-height: 100vh;
-        }
-        /* แถบเมนูด้านซ้ายแบบลอย (Fixed Sidebar) */
-        aside {
-            width: 260px;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px;
-            z-index: 1000;
-        }
-        .sidebar-header {
-            text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        .sidebar-header h1 {
-            font-size: 22px;
-            color: #b991bf;
-            font-weight: 700;
-        }
-        .sidebar-header p {
-            font-size: 12px;
-            color: #666;
-            margin-top: 4px;
-        }
-        nav {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .nav-btn {
-            width: 100%;
-            padding: 12px 16px;
-            text-align: left;
-            background: none;
-            border: none;
-            border-radius: 12px;
-            font-family: 'Sarabun', sans-serif;
-            font-size: 15px;
-            font-weight: 500;
-            color: #555;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .nav-btn:hover {
-            background-color: #f0f0f0;
-        }
-        .nav-btn.active {
-            background-color: #b991bf;
-            color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .sidebar-footer {
-            font-size: 11px;
-            color: #888;
-            text-align: center;
-        }
-
-        /* พื้นที่เนื้อหาหลัก (เว้นระยะซ้ายให้พ้น Sidebar) */
-        main {
-            margin-left: 260px;
-            flex: 1;
-            padding: 40px;
-            min-height: 100vh;
-        }
-        .page-content {
-            display: none;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .page-content.active {
-            display: block;
-        }
-
-        /* ดีไซน์การ์ดและองค์ประกอบต่างๆ */
-        .page-title {
-            text-align: center;
-            font-size: 42px;
-            font-weight: bold;
-            color: #f2e479;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-        .card h3 {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-        .grid-cols-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .countdown-box {
-            background-color: #f9f5fb;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-        }
-        .countdown-box p:first-child {
-            font-weight: 600;
-            color: #555;
-        }
-        .countdown-box p:nth-child(2) {
-            font-size: 11px;
-            color: #888;
-            margin-bottom: 8px;
-        }
-        .countdown-num {
-            font-size: 22px;
-            font-weight: bold;
-            color: #8e5296;
-        }
-        .action-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Sarabun', sans-serif;
-            font-weight: 600;
-            color: #555;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.2s;
-        }
-        .action-btn:hover {
-            background-color: #eaeaea;
-        }
-        .event-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 15px;
-            background-color: #faf5fc;
-            border: 1px solid #f0e1f5;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-        .event-item.completed {
-            background-color: #f9f9f9;
-            border-color: #eee;
-            opacity: 0.6;
-            text-decoration: line-through;
-        }
-        .event-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .event-left input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #b991bf;
-            cursor: pointer;
-        }
-        .del-btn {
-            background: none;
-            border: none;
-            color: #aaa;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        .del-btn:hover {
-            color: #ff4d4d;
-        }
-        .form-group {
-            display: grid;
-            grid-template-columns: 2fr 1.5fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .form-group input {
-            padding: 10px 14px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-family: 'Sarabun', sans-serif;
-            font-size: 14px;
-            outline: none;
-        }
-        .form-group input:focus {
-            border-color: #b991bf;
-        }
-        .submit-btn {
-            background-color: #b991bf;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Sarabun', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .submit-btn:hover {
-            opacity: 0.9;
-        }
-        a {
-            color: #8e5296;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .link-block {
-            display: block;
-            margin-top: 6px;
-            word-break: break-all;
-            font-size: 14px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Sarabun', sans-serif; background-color: #b991bf; color: #333; display: flex; min-height: 100vh; }
         
-        /* Responsive สำหรับมือถือ */
+        /* Sidebar แถบด้านซ้าย */
+        aside { width: 260px; background-color: #ffffff; box-shadow: 2px 0 10px rgba(0,0,0,0.1); position: fixed; top: 0; left: 0; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; z-index: 1000; }
+        .sidebar-header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .sidebar-header h1 { font-size: 22px; color: #b991bf; font-weight: 700; }
+        .sidebar-header p { font-size: 12px; color: #666; margin-top: 4px; }
+        nav { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .nav-btn { width: 100%; padding: 12px 16px; text-align: left; background: none; border: none; border-radius: 12px; font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 500; color: #555; cursor: pointer; transition: all 0.2s; text-decoration: none; display: block; }
+        .nav-btn:hover { background-color: #f0f0f0; }
+        .nav-btn.active { background-color: #b991bf; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .sidebar-footer { font-size: 11px; color: #888; text-align: center; }
+
+        /* Main Content */
+        main { margin-left: 260px; flex: 1; padding: 40px; }
+        .page-title { text-align: center; font-size: 52px; font-weight: bold; color: #f2e479; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); margin-bottom: 30px; }
+        .card { background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .card h3 { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 15px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .grid-cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .countdown-box { background-color: #f9f5fb; border: 1px solid #eee; border-radius: 12px; padding: 15px; text-align: center; }
+        .countdown-box p:first-child { font-weight: 600; color: #555; }
+        .countdown-box p:nth-child(2) { font-size: 11px; color: #888; margin-bottom: 8px; }
+        .countdown-num { font-size: 24px; font-weight: bold; color: #8e5296; }
+        .action-btn { display: block; width: 100%; padding: 10px; background-color: #f5f5f5; border: none; border-radius: 10px; font-family: 'Sarabun', sans-serif; font-weight: 600; color: #555; cursor: pointer; margin-top: 15px; text-align: center; text-decoration: none; transition: background 0.2s; }
+        .action-btn:hover { background-color: #eaeaea; }
+
         @media(max-width: 768px) {
             body { flex-direction: column; }
-            aside {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
-            main {
-                margin-left: 0;
-                padding: 20px;
-            }
-            .grid-3, .grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            .form-group {
-                grid-template-columns: 1fr;
-            }
+            aside { position: relative; width: 100%; height: auto; }
+            main { margin-left: 0; padding: 20px; }
+            .grid-3, .grid-cols-3 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- แถบด้านซ้ายมือ (ลอยติดหน้าจอ) -->
     <aside>
         <div>
             <div class="sidebar-header">
@@ -279,200 +51,72 @@
                 <p>สู้ไปด้วยกันนะว่าที่คุณหมอ/เภสัช!</p>
             </div>
             <nav>
-                <button onclick="switchTab('home')" id="nav-home" class="nav-btn active">🏠 หน้าแรก</button>
-                <button onclick="switchTab('calendar')" id="nav-calendar" class="nav-btn">📅 ปฏิทินและกิจกรรม</button>
-                <button onclick="switchTab('info')" id="nav-info" class="nav-btn">💊 ข้อมูลคณะและคะแนน</button>
-                <button onclick="switchTab('files')" id="nav-files" class="nav-btn">📚 หนังสือและไฟล์เรียน</button>
+                <a href="index.html" class="nav-btn active">🏠 หน้าแรก</a>
+                <a href="calendar.html" class="nav-btn">📅 ปฏิทินและกิจกรรม</a>
+                <a href="info.html" class="nav-btn">💊 ข้อมูลคณะและคะแนน</a>
+                <a href="files.html" class="nav-btn">📚 หนังสือและไฟล์เรียน</a>
             </nav>
         </div>
-        <div class="sidebar-footer">
-            Target: DEK 70 Admission
-        </div>
+        <div class="sidebar-footer">Target: DEK 70 Admission</div>
     </aside>
 
-    <!-- พื้นที่แสดงเนื้อหาหลัก -->
     <main>
-        
-        <!-- ================= PAGE 1: หน้าแรก ================= -->
-        <div id="page-home" class="page-content active">
-            <h2 class="page-title">Dek70</h2>
+        <h2 class="page-title">Dek70</h2>
 
-            <!-- กรอบที่ 1: นับเวลาถอยหลังวันสอบ -->
-            <div class="card">
-                <h3>⏳ นับถอยหลังวันสอบ</h3>
-                <div class="grid-3">
-                    <div class="countdown-box">
-                        <p>TGAT</p>
-                        <p>30 ม.ค. 2570</p>
-                        <p id="countdown-tgat" class="countdown-num">-</p>
-                    </div>
-                    <div class="countdown-box">
-                        <p>TPAT 1</p>
-                        <p>13 ก.พ. 2570</p>
-                        <p id="countdown-tpat1" class="countdown-num">-</p>
-                    </div>
-                    <div class="countdown-box">
-                        <p>A-LEVEL</p>
-                        <p>13 มี.ค. 2570</p>
-                        <p id="countdown-alevel" class="countdown-num">-</p>
-                    </div>
+        <!-- กรอบที่ 1: นับเวลาถอยหลัง -->
+        <div class="card">
+            <h3>⏳ นับถอยหลังวันสอบ</h3>
+            <div class="grid-3">
+                <div class="countdown-box">
+                    <p>TGAT</p>
+                    <p>30 ม.ค. 2570</p>
+                    <p id="countdown-tgat" class="countdown-num">กำลังคำนวณ...</p>
                 </div>
-            </div>
-
-            <div class="grid-cols-3">
-                <!-- กรอบที่ 2: กิจกรรมที่ใกล้จะถึง -->
-                <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <h3>📌 กิจกรรมที่ใกล้จะถึง</h3>
-                        <div id="nearest-event-box" style="font-size: 14px; color: #555; padding: 5px 0;">
-                            กำลังโหลดข้อมูล...
-                        </div>
-                    </div>
-                    <button onclick="switchTab('calendar')" class="action-btn">ดูกิจกรรมทั้งหมด &rarr;</button>
+                <div class="countdown-box">
+                    <p>TPAT 1</p>
+                    <p>13 ก.พ. 2570</p>
+                    <p id="countdown-tpat1" class="countdown-num">กำลังคำนวณ...</p>
                 </div>
-
-                <!-- กรอบที่ 3: มหาลัยและคณะ -->
-                <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <h3>💊 มหาลัยและคณะ</h3>
-                        <p style="font-size: 13px; color: #666;">รวบรวมเว็บไซต์ คะแนนสูงสุด ต่ำสุด และข้อมูลคณะเภสัชฯ ที่สนใจ</p>
-                    </div>
-                    <button onclick="switchTab('info')" class="action-btn">ดูข้อมูลคณะ &rarr;</button>
-                </div>
-
-                <!-- กรอบที่ 4: หนังสือ ไฟล์ สำหรับเรียน -->
-                <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <h3>📚 หนังสือ ไฟล์ สำหรับการเรียน</h3>
-                        <p style="font-size: 13px; color: #666;">แหล่งรวมไดร์ฟเอกสาร สสวท., เคมี, เลข, อังกฤษ และข้อสอบเก่า</p>
-                    </div>
-                    <button onclick="switchTab('files')" class="action-btn">เปิดคลังไฟล์ &rarr;</button>
+                <div class="countdown-box">
+                    <p>A-LEVEL</p>
+                    <p>13 มี.ค. 2570</p>
+                    <p id="countdown-alevel" class="countdown-num">กำลังคำนวณ...</p>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PAGE 2: ปฏิทินกิจกรรม ================= -->
-        <div id="page-calendar" class="page-content">
-            <h2 class="page-title">ปฏิทินกิจกรรม</h2>
-
-            <div class="card">
-                <h3>ไทม์ไลม์กำหนดการเตรียมตัวสอบ</h3>
-                <div id="event-list">
-                    <!-- รายการกิจกรรม -->
+        <div class="grid-cols-3">
+            <!-- กรอบที่ 2: กิจกรรมที่ใกล้จะถึง -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>📌 กิจกรรมที่ใกล้จะถึง</h3>
+                    <div id="nearest-event-box" style="font-size: 14px; color: #555; padding: 5px 0;">กำลังโหลด...</div>
                 </div>
+                <a href="calendar.html" class="action-btn">ดูกิจกรรมทั้งหมด &rarr;</a>
+            </div>
 
-                <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
-                    <h4 style="font-size: 14px; font-weight: bold; color: #444; margin-bottom: 10px;">➕ เพิ่มกิจกรรมหรือกำหนดการใหม่</h4>
-                    <form id="add-event-form" onsubmit="addNewEvent(event)" class="form-group">
-                        <input type="text" id="event-name" placeholder="ชื่อกิจกรรม (เช่น สอบกลางภาค)" required>
-                        <input type="date" id="event-date" required>
-                        <button type="submit" class="submit-btn">+ บันทึก</button>
-                    </form>
+            <!-- กรอบที่ 3: มหาลัยและคณะ -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>💊 มหาลัยและคณะ</h3>
+                    <p style="font-size: 13px; color: #666;">รวบรวมเว็บไซต์ คะแนนสูงสุด ต่ำสุด และข้อมูลคณะเภสัชฯ ที่สนใจ</p>
                 </div>
+                <a href="info.html" class="action-btn">ดูข้อมูลคณะ &rarr;</a>
+            </div>
+
+            <!-- กรอบที่ 4: หนังสือ ไฟล์ สำหรับเรียน -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>📚 หนังสือ ไฟล์ สำหรับการเรียน</h3>
+                    <p style="font-size: 13px; color: #666;">แหล่งรวมไดร์ฟเอกสาร สสวท., เคมี, เลข, อังกฤษ และข้อสอบเก่า</p>
+                </div>
+                <a href="files.html" class="action-btn">เปิดคลังไฟล์ &rarr;</a>
             </div>
         </div>
-
-        <!-- ================= PAGE 3: ข้อมูลสำหรับการเตรียมตัว ================= -->
-        <div id="page-info" class="page-content">
-            <h2 class="page-title">ข้อมูลสำหรับการเตรียมตัว</h2>
-
-            <div class="card">
-                <h3 style="color: #2b6cb0;">คณะเภสัช มหิดล</h3>
-                <p style="font-size: 14px; margin-bottom: 10px;">
-                    เว็บไซต์คณะ: 
-                    <a href="https://pharmacy.mahidol.ac.th/admissions/main.php" target="_blank" class="link-block">
-                        https://pharmacy.mahidol.ac.th/admissions/main.php
-                    </a>
-                </p>
-                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 13px; font-family: monospace; color: #444;">
-                    <p style="font-family: 'Sarabun', sans-serif; font-weight: bold; margin-bottom: 5px;">สถิติคะแนนย้อนหลัง:</p>
-                    <p>• ปี 69: สูงสุด 67.4182 | ต่ำสุด 62.1292</p>
-                    <p>• ปี 68: สูงสุด 74.7896 | ต่ำสุด 62.9430</p>
-                    <p>• ปี 67: สูงสุด 59.5768 | ต่ำสุด 53.9493</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3 style="color: #d53f8c;">คณะเภสัช สาขาบริบาลฯ จุฬา</h3>
-                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 13px; font-family: monospace; color: #444;">
-                    <p style="font-family: 'Sarabun', sans-serif; font-weight: bold; margin-bottom: 5px;">สถิติคะแนนย้อนหลัง:</p>
-                    <p>• ปี 69: สูงสุด 70.4203 | ต่ำสุด 63.3449</p>
-                    <p>• ปี 68: สูงสุด 72.7689 | ต่ำสุด 64.1074</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= PAGE 4: หนังสือและไฟล์สำหรับเรียน ================= -->
-        <div id="page-files" class="page-content">
-            <h2 class="page-title">หนังสือและไฟล์สำหรับเรียน</h2>
-
-            <div class="card">
-                <h3>หนังสือสสวท</h3>
-                <p style="font-size: 14px; color: #666;">ลิงก์สำหรับเข้าไดร์ฟ เพื่อดูเอกสาร:</p>
-                <a href="https://drive.google.com/drive/folders/1-OR9ez_DJLH5jfZBEu-ykjD4FQZmzTUI" target="_blank" class="link-block">
-                    📂 https://drive.google.com/drive/folders/1-OR9ez_DJLH5jfZBEu-ykjD4FQZmzTUI
-                </a>
-            </div>
-
-            <div class="card">
-                <h3>วิชาเคมี</h3>
-                <p style="font-size: 14px; color: #666;">ลิงก์สำหรับเข้าไดร์ฟ เพื่อดูเอกสาร:</p>
-                <a href="https://drive.google.com/drive/folders/1QzXDibg7uxSDIv7rOic3PV6EGX7xvDEm" target="_blank" class="link-block">
-                    📂 1000 ข้อ แยกบท: https://drive.google.com/drive/folders/1QzXDibg7uxSDIv7rOic3PV6EGX7xvDEm
-                </a>
-            </div>
-
-            <div class="card">
-                <h3>วิชาคณิต</h3>
-                <a href="https://drive.google.com/drive/folders/1YxToFY8NMqX8J0l-U8_TNpx1_yJs9YOt" target="_blank" class="link-block">
-                    📂 1000 ข้อ แยกบท: https://drive.google.com/drive/folders/1YxToFY8NMqX8J0l-U8_TNpx1_yJs9YOt
-                </a>
-            </div>
-
-            <div class="card">
-                <h3>ภาษาอังกฤษ</h3>
-                <div style="font-size: 14px; display: flex; flex-direction: column; gap: 8px;">
-                    <div><strong>Phrasal verbs:</strong> <a href="https://drive.google.com/file/d/1e1P9FE-Kmj3fVyEQuMJvTTDGfGlgM5XR/view?usp=drivesdk" target="_blank">ลิงก์เอกสาร</a></div>
-                    <div><strong>Idioms:</strong> <a href="https://drive.google.com/file/d/18VxSUsfbub_IBYgPFuFX_2T84DR1bUM_/view?usp=drivesdk" target="_blank">ลิงก์เอกสาร</a></div>
-                    <div><strong>Synonyms:</strong> <a href="https://drive.google.com/file/d/1BkplQtexRframca8ysaAMrAo1zRA1_f8/view?usp=drivesdk" target="_blank">ลิงก์เอกสาร</a></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>ข้อสอบเก่า</h3>
-                <div style="font-size: 14px; display: flex; flex-direction: column; gap: 8px;">
-                    <a href="https://x.com/moonlitformj/status/1841040714958049441" target="_blank">🐦 ลิงก์ X (1)</a>
-                    <a href="https://x.com/tutorjax/status/1521436133401698305" target="_blank">🐦 ลิงก์ X (2)</a>
-                    <a href="https://drive.google.com/drive/folders/163FqvoXhLkqc8msBhKsqCNy2UPFOA-dW" target="_blank">📂 ข้อสอบเก่าภาษาอังกฤษ</a>
-                </div>
-            </div>
-        </div>
-
     </main>
 
-    <!-- JavaScript ควบคุมการทำงาน -->
     <script>
-        let defaultEvents = [
-            { name: "Mock TGAT", date: "2026-10-31", completed: false },
-            { name: "Mock TPAT 1", date: "2026-11-01", completed: false },
-            { name: "สมัคร TGAT", date: "2026-11-04", completed: false },
-            { name: "สอบ TGAT", date: "2027-01-30", completed: false },
-            { name: "สอบ TPAT 1", date: "2027-02-13", completed: false },
-            { name: "สอบ A-LEVEL", date: "2027-03-13", completed: false }
-        ];
-
-        let events = JSON.parse(localStorage.getItem('dek70_events')) || defaultEvents;
-
-        function switchTab(tabId) {
-            const tabs = ['home', 'calendar', 'info', 'files'];
-            tabs.forEach(t => {
-                document.getElementById(`page-${t}`).classList.remove('active');
-                document.getElementById(`nav-${t}`).classList.remove('active');
-            });
-            document.getElementById(`page-${tabId}`).classList.add('active');
-            document.getElementById(`nav-${tabId}`).classList.add('active');
-        }
-
+        // ระบบนับถอยหลัง
         function updateCountdowns() {
             const now = new Date();
             now.setHours(0, 0, 0, 0);
@@ -494,28 +138,38 @@
             return `สอบแล้ว`;
         }
 
-        function renderEvents() {
+        // ดึงกิจกรรมที่ใกล้ที่สุดจาก LocalStorage มาแสดง
+        function loadNearestEvent() {
+            let defaultEvents = [
+                { name: "Mock TGAT", date: "2026-10-31", completed: false },
+                { name: "Mock TPAT 1", date: "2026-11-01", completed: false },
+                { name: "สมัคร TGAT", date: "2026-11-04", completed: false },
+                { name: "สอบ TGAT", date: "2027-01-30", completed: false },
+                { name: "สอบ TPAT 1", date: "2027-02-13", completed: false },
+                { name: "สอบ A-LEVEL", date: "2027-03-13", completed: false }
+            ];
+            let events = JSON.parse(localStorage.getItem('dek70_events')) || defaultEvents;
             events.sort((a, b) => new Date(a.date) - new Date(b.date));
-            localStorage.setItem('dek70_events', JSON.stringify(events));
-
-            const listEl = document.getElementById('event-list');
-            const nearestBox = document.getElementById('nearest-event-box');
-            listEl.innerHTML = '';
 
             let today = new Date();
             today.setHours(0,0,0,0);
-            let nearestFound = false;
             let nearestText = "ไม่มีกิจกรรมที่ใกล้จะถึง";
 
-            events.forEach((ev, index) => {
+            for (let ev of events) {
                 let evDate = new Date(ev.date + 'T00:00:00');
-                
-                if (!nearestFound && evDate >= today && !ev.completed) {
+                if (evDate >= today && !ev.completed) {
                     let options = { year: 'numeric', month: 'long', day: 'numeric' };
                     let dateStr = evDate.toLocaleDateString('th-TH', options);
                     nearestText = `<strong>${ev.name}</strong><br><span style="color:#8e5296; font-size:12px;">📅 ${dateStr}</span>`;
-                    nearestFound = true;
+                    break;
                 }
+            }
+            document.getElementById('nearest-event-box').innerHTML = nearestText;
+        }
 
-                let options = { year: 'numeric', month: 'short', day: 'numeric' };
-                let formattedDate
+        updateCountdowns();
+        loadNearestEvent();
+    </script>
+</body>
+</html>
+
