@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dek70 Planner - หนังสือและไฟล์เรียน</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Sarabun', sans-serif; background-color: #b991bf; color: #333; display: flex; min-height: 100vh; }
+        
+        aside { width: 260px; background-color: #ffffff; box-shadow: 2px 0 10px rgba(0,0,0,0.1); position: fixed; top: 0; left: 0; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; z-index: 1000; }
+        .sidebar-header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .sidebar-header h1 { font-size: 22px; color: #b991bf; font-weight: 700; }
+        .sidebar-header p { font-size: 12px; color: #666; margin-top: 4px; }
+        nav { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .nav-btn { width: 100%; padding: 12px 16px; text-align: left; background: none; border: none; border-radius: 12px; font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 500; color: #555; cursor: pointer; text-decoration: none; display: block; }
+        .nav-btn:hover { background-color: #f0f0f0; }
+        .nav-btn.active { background-color: #b991bf; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .sidebar-footer { font-size: 11px; color: #888; text-align: center; }
+
+        main { margin-left: 260px; flex: 1; padding: 40px; max-width: 900px; }
+        .page-title { text-align: center; font-size: 52px; font-weight: bold; color: #f2e479; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); margin-bottom: 30px; }
+        .card { background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .card h3 { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px; }
+        
+        a { color: #8e5296; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .link-block { display: block; margin-top: 6px; word-break: break-all; font-size: 14px; }
+
+        @media(max-width: 768px) {
+            body { flex-direction: column; }
+            aside { position: relative; width: 100%; height: auto; }
+            main { margin-left: 0; padding: 20px; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <div>
+            <div class="sidebar-header">
+                <h1>DEK 70 PLANNER</h1>
+                <p>สู้ไปด้วยกันนะว่าที่คุณหมอ/เภสัช!</p>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-btn">🏠 หน้าแรก</a>
+                <a href="calendar.html" class="nav-btn">📅 ปฏิทินและกิจกรรม</a>
+                <a href="info.html" class="nav-btn">💊 ข้อมูลคณะและคะแนน</a>
+                <a href="files.html" class="nav-btn active">📚 หนังสือและไฟล์เรียน</a>
+            </nav>
+        </div>
+        <div class="sidebar-footer">Target: DEK 70 Admission</div>
+    </aside>
+
+    <main>
+        <h2 class="page-title">หนังสือและไฟล์สำหรับเรียน</h2>
+
+        <div class="card">
+            <h3>หนังสือสสวท</h3>
+            <p style="font-size: 14px; color: #666;">ลิงก์สำหรับเข้าไดร์ฟ เพื่อดูเอกสาร:</p>
+            <a href="https://drive.google.com/drive/folders/1-OR9ez_DJLH5jfZBEu-ykjD4FQZmzTUI" target="_blank" class="link-block">
+                📂 https://drive.google.com/drive/folders/1-OR9ez_DJLH5jfZBEu-ykjD4FQZmzTUI
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>วิชาเคมี</h3>
+            <p style="font-size: 14px; color: #666;">ลิงก์สำหรับเข้าไดร์ฟ เพื่อดูเอกสาร:</p>
+            <a href="https://drive.google.com/drive/folders/1QzXDibg7uxSDIv7rOic3PV6EGX7xvDEm" target="_blank" class="link-block">
+                📂 1000 ข้อ แยกบท: https://drive.google.com/drive/folders/1QzXDibg7uxSDIv7rOic3PV6EGX7xvDEm
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>วิชาคณิต</h3>
+            <a href="https://drive.google.com/drive/folders/1YxToFY8NMqX8J0l-U8_TNpx1_yJs9YOt" target="_blank" class="link-block">
+                📂 1000 ข้อ แยกบท: https://drive.google.com/drive/folders/1YxToFY8NMqX8J0l-U8_TNpx1_yJs9YOt
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>ภาษาอังกฤษ</h3>
+            <div style="font-size: 14px; display: flex; flex-direction: column; gap: 8px;">
+                <div><strong>Phrasal verbs:</strong> <a href="https://drive.google.com/file/d/1e1P9FE-Kmj3fVyEQuMJvTTDGfGlgM5XR/view?usp=drivesdk" target="_blank">ลิงก์เอกสาร</a></div>
+                <div><strong>Idioms:</strong> <a href="https://drive.google.com/file/d/18VxSUsfbub_IBYgPFuFX_2T84DR1bUM_/view?usp=drivesdk" target="_blank">ลิงก์เอกสาร</a></div>
+                <div><strong>Synonyms:</strong> <a href="https://drive.google.com/file/d/1BkplQtexRframca8ysaAMrAo1zRA1_f8/view?usp=drivesdk" target="_blank">ลิงก์เอกสาร</a></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>ข้อสอบเก่า</h3>
+            <div style="font-size: 14px; display: flex; flex-direction: column; gap: 8px;">
+                <a href="https://x.com/moonlitformj/status/1841040714958049441" target="_blank">🐦 ลิงก์ X (1)</a>
+                <a href="https://x.com/tutorjax/status/1521436133401698305" target="_blank">🐦 ลิงก์ X (2)</a>
+                <a href="https://drive.google.com/drive/folders/163FqvoXhLkqc8msBhKsqCNy2UPFOA-dW" target="_blank">📂 ข้อสอบเก่าภาษาอังกฤษ</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
