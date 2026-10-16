@@ -7,189 +7,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Sarabun', sans-serif; background-color: #b991bf; color: #333; display: flex; min-height: 100vh; }
+        body { font-family: 'Sarabun', sans-serif; background-color: #b991bf; color: #333; display: flex; min-height: 100vh; padding: 20px; }
         
-        /* Sidebar ด้านซ้ายมือแบบคงที่เสมอทุกหน้าจอ */
         aside { 
-            width: 240px; 
-            min-width: 240px;
-            background-color: #ffffff; 
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1); 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            padding: 20px; 
-            z-index: 1000; 
+            width: 220px; min-width: 220px; background-color: #ffffff; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12); position: fixed; 
+            top: 20px; left: 20px; bottom: 20px; border-radius: 24px;
+            display: flex; flex-direction: column; justify-content: space-between; 
+            padding: 24px 16px; z-index: 1000; border: 2px solid #f3e8f4;
         }
-        .sidebar-header { text-align: center; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-        .sidebar-header h1 { font-size: 20px; color: #b991bf; font-weight: 700; }
-        .sidebar-header p { font-size: 11px; color: #666; margin-top: 4px; }
+        .sidebar-header { text-align: center; padding-bottom: 15px; border-bottom: 2px dashed #f0e1f5; }
+        .sidebar-header h1 { font-size: 19px; color: #8e5296; font-weight: 700; letter-spacing: 0.5px; }
+        .sidebar-header p { font-size: 11px; color: #888; margin-top: 3px; }
         nav { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
         .nav-btn { 
-            width: 100%; 
-            padding: 12px 14px; 
-            text-align: left; 
-            background: none; 
-            border: none; 
-            border-radius: 12px; 
-            font-family: 'Sarabun', sans-serif; 
-            font-size: 14px; 
-            font-weight: 500; 
-            color: #555; 
-            cursor: pointer; 
-            transition: all 0.2s; 
-            text-decoration: none; 
-            display: block; 
+            width: 100%; padding: 12px 14px; text-align: left; background: none; 
+            border: none; border-radius: 14px; font-family: 'Sarabun', sans-serif; 
+            font-size: 13.5px; font-weight: 600; color: #666; cursor: pointer; 
+            transition: all 0.25s ease; text-decoration: none; display: flex; align-items: center; gap: 8px;
         }
-        .nav-btn:hover { background-color: #f0f0f0; }
-        .nav-btn.active { background-color: #b991bf; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .sidebar-footer { font-size: 11px; color: #888; text-align: center; }
+        .nav-btn:hover { background-color: #f7eef9; color: #8e5296; transform: translateX(3px); }
+        .nav-btn.active { background: linear-gradient(135deg, #b991bf, #9d6fa3); color: white; box-shadow: 0 4px 12px rgba(185, 145, 191, 0.4); }
+        .sidebar-footer { font-size: 10.5px; color: #aaa; text-align: center; font-weight: 500; }
 
-        /* พื้นที่เนื้อหาหลัก */
-        main { margin-left: 240px; flex: 1; padding: 30px; }
-        .page-title { text-align: center; font-size: 44px; font-weight: bold; color: #f2e479; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); margin-bottom: 25px; }
-        .card { background-color: #ffffff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 20px; }
-        .card h3 { font-size: 17px; font-weight: bold; color: #333; margin-bottom: 12px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-        .grid-cols-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-        .countdown-box { background-color: #f9f5fb; border: 1px solid #eee; border-radius: 12px; padding: 15px; text-align: center; }
-        .countdown-box p:first-child { font-weight: 600; color: #555; }
-        .countdown-box p:nth-child(2) { font-size: 11px; color: #888; margin-bottom: 8px; }
-        .countdown-num { font-size: 22px; font-weight: bold; color: #8e5296; }
-        .action-btn { display: block; width: 100%; padding: 10px; background-color: #f5f5f5; border: none; border-radius: 10px; font-family: 'Sarabun', sans-serif; font-weight: 600; color: #555; cursor: pointer; margin-top: 15px; text-align: center; text-decoration: none; transition: background 0.2s; }
-        .action-btn:hover { background-color: #eaeaea; }
-    </style>
-</head>
-<body>
-
-    <aside>
-        <div>
-            <div class="sidebar-header">
-                <h1>DEK 70 PLANNER</h1>
-                <p>สู้ไปด้วยกันนะว่าที่คุณหมอ/เภสัช!</p>
-            </div>
-            <nav>
-                <a href="index.html" class="nav-btn active">🏠 หน้าแรก</a>
-                <a href="calendar.html" class="nav-btn">📅 ปฏิทินและกิจกรรม</a>
-                <a href="info.html" class="nav-btn">💊 ข้อมูลคณะและคะแนน</a>
-                <a href="files.html" class="nav-btn">📚 หนังสือและไฟล์เรียน</a>
-            </nav>
-        </div>
-        <div class="sidebar-footer">Target: DEK 70 Admission</div>
-    </aside>
-
-    <main>
-        <h2 class="page-title">Dek70</h2>
-
-        <!-- กรอบที่ 1: นับเวลาถอยหลัง -->
-        <div class="card">
-            <h3>⏳ นับถอยหลังวันสอบ</h3>
-            <div class="grid-3">
-                <div class="countdown-box">
-                    <p>TGAT</p>
-                    <p>30 ม.ค. 2570</p>
-                    <p id="countdown-tgat" class="countdown-num">กำลังคำนวณ...</p>
-                </div>
-                <div class="countdown-box">
-                    <p>TPAT 1</p>
-                    <p>13 ก.พ. 2570</p>
-                    <p id="countdown-tpat1" class="countdown-num">กำลังคำนวณ...</p>
-                </div>
-                <div class="countdown-box">
-                    <p>A-LEVEL</p>
-                    <p>13 มี.ค. 2570</p>
-                    <p id="countdown-alevel" class="countdown-num">กำลังคำนวณ...</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-cols-3">
-            <!-- กรอบที่ 2: กิจกรรมที่ใกล้จะถึง -->
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h3>📌 กิจกรรมที่ใกล้จะถึง</h3>
-                    <div id="nearest-event-box" style="font-size: 14px; color: #555; padding: 5px 0;">กำลังโหลด...</div>
-                </div>
-                <a href="calendar.html" class="action-btn">ดูกิจกรรมทั้งหมด &rarr;</a>
-            </div>
-
-            <!-- กรอบที่ 3: มหาลัยและคณะ -->
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h3>💊 มหาลัยและคณะ</h3>
-                    <p style="font-size: 13px; color: #666;">รวบรวมเว็บไซต์ คะแนนสูงสุด ต่ำสุด และข้อมูลคณะเภสัชฯ ที่สนใจ</p>
-                </div>
-                <a href="info.html" class="action-btn">ดูข้อมูลคณะ &rarr;</a>
-            </div>
-
-            <!-- กรอบที่ 4: หนังสือ ไฟล์ สำหรับเรียน -->
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h3>📚 หนังสือ ไฟล์ สำหรับการเรียน</h3>
-                    <p style="font-size: 13px; color: #666;">แหล่งรวมไดร์ฟเอกสาร สสวท., เคมี, เลข, อังกฤษ และข้อสอบเก่า</p>
-                </div>
-                <a href="files.html" class="action-btn">เปิดคลังไฟล์ &rarr;</a>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        function updateCountdowns() {
-            const now = new Date();
-            now.setHours(0, 0, 0, 0);
-
-            const tgatDate = new Date(2027, 0, 30);
-            const tpat1Date = new Date(2027, 1, 13);
-            const alevelDate = new Date(2027, 2, 13);
-
-            document.getElementById('countdown-tgat').innerText = getDaysRemaining(tgatDate, now);
-            document.getElementById('countdown-tpat1').innerText = getDaysRemaining(tpat1Date, now);
-            document.getElementById('countdown-alevel').innerText = getDaysRemaining(alevelDate, now);
-        }
-
-        function getDaysRemaining(targetDate, now) {
-            const diffTime = targetDate.getTime() - now.getTime();
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            if (diffDays > 0) return `อีก ${diffDays} วัน`;
-            if (diffDays === 0) return `สอบวันนี้! 🔥`;
-            return `สอบแล้ว`;
-        }
-
-        function loadNearestEvent() {
-            let defaultEvents = [
-                { name: "Mock TGAT", date: "2026-10-31", completed: false },
-                { name: "Mock TPAT 1", date: "2026-11-01", completed: false },
-                { name: "สมัคร TGAT", date: "2026-11-04", completed: false },
-                { name: "สอบ TGAT", date: "2027-01-30", completed: false },
-                { name: "สอบ TPAT 1", date: "2027-02-13", completed: false },
-                { name: "สอบ A-LEVEL", date: "2027-03-13", completed: false }
-            ];
-            let events = JSON.parse(localStorage.getItem('dek70_events')) || defaultEvents;
-            events.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            let today = new Date();
-            today.setHours(0,0,0,0);
-            let nearestText = "ไม่มีกิจกรรมที่ใกล้จะถึง";
-
-            for (let ev of events) {
-                let parts = ev.date.split('-');
-                let evDate = new Date(parts[0], parts[1] - 1, parts[2]);
-                if (evDate >= today && !ev.completed) {
-                    let options = { year: 'numeric', month: 'long', day: 'numeric' };
-                    let dateStr = evDate.toLocaleDateString('th-TH', options);
-                    nearestText = `<strong>${ev.name}</strong><br><span style="color:#8e5296; font-size:12px;">📅 ${dateStr}</span>`;
-                    break;
-                }
-            }
-            document.getElementById('nearest-event-box').innerHTML = nearestText;
-        }
-
-        updateCountdowns();
-        loadNearestEvent();
-    </script>
-</body>
-</html>
+        main { margin-left: 255px; flex: 1;
+              
