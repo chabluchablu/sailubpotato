@@ -10,27 +10,33 @@
         body { font-family: 'Sarabun', sans-serif; background-color: #b991bf; color: #333; display: flex; min-height: 100vh; padding: 20px; }
         
         aside { 
-            width: 220px; min-width: 220px; background-color: #ffffff; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12); position: fixed; 
-            top: 20px; left: 20px; bottom: 20px; border-radius: 24px;
-            display: flex; flex-direction: column; justify-content: space-between; 
-            padding: 24px 16px; z-index: 1000; border: 2px solid #f3e8f4;
+            width: 65px; min-width: 65px; background-color: #ffffff; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); position: fixed; 
+            top: 50%; left: 15px; transform: translateY(-50%); border-radius: 30px; 
+            display: flex; flex-direction: column; align-items: center; padding: 20px 0; 
+            z-index: 9999; border: 2px solid #f3e8f4;
         }
-        .sidebar-header { text-align: center; padding-bottom: 15px; border-bottom: 2px dashed #f0e1f5; }
-        .sidebar-header h1 { font-size: 19px; color: #8e5296; font-weight: 700; }
-        .sidebar-header p { font-size: 11px; color: #888; margin-top: 3px; }
-        nav { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .sidebar-logo { font-size: 20px; margin-bottom: 20px; cursor: default; }
+        nav { display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: center; }
+        
         .nav-btn { 
-            width: 100%; padding: 12px 14px; text-align: left; background: none; 
-            border: none; border-radius: 14px; font-family: 'Sarabun', sans-serif; 
-            font-size: 13.5px; font-weight: 600; color: #666; cursor: pointer; 
-            transition: all 0.25s ease; text-decoration: none; display: flex; align-items: center; gap: 8px;
+            width: 45px; height: 45px; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 20px; 
+            color: #666; text-decoration: none; transition: all 0.25s ease; 
+            position: relative; background-color: #fcf8fd;
         }
-        .nav-btn:hover { background-color: #f7eef9; color: #8e5296; transform: translateX(3px); }
-        .nav-btn.active { background: linear-gradient(135deg, #b991bf, #9d6fa3); color: white; box-shadow: 0 4px 12px rgba(185, 145, 191, 0.4); }
-        .sidebar-footer { font-size: 10.5px; color: #aaa; text-align: center; font-weight: 500; }
+        .nav-btn:hover { background-color: #f0e1f5; transform: scale(1.1); }
+        .nav-btn.active { background: linear-gradient(135deg, #b991bf, #9d6fa3); color: white; box-shadow: 0 4px 12px rgba(185, 145, 191, 0.5); }
 
-        main { margin-left: 255px; flex: 1; padding: 10px 20px; max-width: 900px; }
+        .nav-btn::after {
+            content: attr(data-title); position: absolute; left: 58px; 
+            background-color: #4a3e4e; color: white; padding: 5px 12px; 
+            border-radius: 8px; font-size: 12px; font-weight: 600; white-space: nowrap; 
+            opacity: 0; pointer-events: none; transition: opacity 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .nav-btn:hover::after { opacity: 1; }
+
+        main { margin-left: 80px; flex: 1; padding: 10px 15px; max-width: 900px; }
         .page-title { text-align: center; font-size: 48px; font-weight: 800; color: #f2e479; text-shadow: 2px 3px 6px rgba(0,0,0,0.25); margin-bottom: 25px; }
         
         .card { 
@@ -48,30 +54,18 @@
         .drive-link:hover { background-color: #8e5296; color: white; }
 
         .link-group { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
-
-        @media(max-width: 768px) {
-            body { flex-direction: column; padding: 10px; }
-            aside { position: relative; width: 100%; min-width: 100%; height: auto; top: 0; left: 0; bottom: 0; margin-bottom: 15px; }
-            main { margin-left: 0; padding: 0; }
-        }
     </style>
 </head>
 <body>
 
     <aside>
-        <div>
-            <div class="sidebar-header">
-                <h1>✨ DEK 70 PLANNER</h1>
-                <p>สู้ไปด้วยกันนะว่าที่คุณหมอ/เภสัช! 💊💙</p>
-            </div>
-            <nav>
-                <a href="index.html" class="nav-btn"><span>🏠</span> หน้าแรก</a>
-                <a href="calendar.html" class="nav-btn"><span>📅</span> ปฏิทินและกิจกรรม</a>
-                <a href="info.html" class="nav-btn"><span>💊</span> ข้อมูลคณะและคะแนน</a>
-                <a href="files.html" class="nav-btn active"><span>📚</span> หนังสือและไฟล์เรียน</a>
-            </nav>
-        </div>
-        <div class="sidebar-footer">🎯 Target: DEK 70 Admission</div>
+        <div class="sidebar-logo">✨</div>
+        <nav>
+            <a href="index.html" class="nav-btn" data-title="หน้าแรก">🏠</a>
+            <a href="calendar.html" class="nav-btn" data-title="ปฏิทินและกิจกรรม">📅</a>
+            <a href="info.html" class="nav-btn" data-title="ข้อมูลคณะและคะแนน">💊</a>
+            <a href="files.html" class="nav-btn active" data-title="หนังสือและไฟล์เรียน">📚</a>
+        </nav>
     </aside>
 
     <main>
