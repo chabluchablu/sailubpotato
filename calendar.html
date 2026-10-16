@@ -7,62 +7,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Sarabun', sans-serif; background-color: #b991bf; color: #333; display: flex; min-height: 100vh; }
+        body { font-family: 'Sarabun', sans-serif; background-color: #b991bf; color: #333; display: flex; min-height: 100vh; padding: 20px; }
         
         aside { 
-            width: 240px; 
-            min-width: 240px;
-            background-color: #ffffff; 
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1); 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            padding: 20px; 
-            z-index: 1000; 
+            width: 220px; min-width: 220px; background-color: #ffffff; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12); position: fixed; 
+            top: 20px; left: 20px; bottom: 20px; border-radius: 24px;
+            display: flex; flex-direction: column; justify-content: space-between; 
+            padding: 24px 16px; z-index: 1000; border: 2px solid #f3e8f4;
         }
-        .sidebar-header { text-align: center; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-        .sidebar-header h1 { font-size: 20px; color: #b991bf; font-weight: 700; }
-        .sidebar-header p { font-size: 11px; color: #666; margin-top: 4px; }
+        .sidebar-header { text-align: center; padding-bottom: 15px; border-bottom: 2px dashed #f0e1f5; }
+        .sidebar-header h1 { font-size: 19px; color: #8e5296; font-weight: 700; }
+        .sidebar-header p { font-size: 11px; color: #888; margin-top: 3px; }
         nav { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
         .nav-btn { 
-            width: 100%; 
-            padding: 12px 14px; 
-            text-align: left; 
-            background: none; 
-            border: none; 
-            border-radius: 12px; 
-            font-family: 'Sarabun', sans-serif; 
-            font-size: 14px; 
-            font-weight: 500; 
-            color: #555; 
-            cursor: pointer; 
-            text-decoration: none; 
-            display: block; 
+            width: 100%; padding: 12px 14px; text-align: left; background: none; 
+            border: none; border-radius: 14px; font-family: 'Sarabun', sans-serif; 
+            font-size: 13.5px; font-weight: 600; color: #666; cursor: pointer; 
+            transition: all 0.25s ease; text-decoration: none; display: flex; align-items: center; gap: 8px;
         }
-        .nav-btn:hover { background-color: #f0f0f0; }
-        .nav-btn.active { background-color: #b991bf; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .sidebar-footer { font-size: 11px; color: #888; text-align: center; }
+        .nav-btn:hover { background-color: #f7eef9; color: #8e5296; transform: translateX(3px); }
+        .nav-btn.active { background: linear-gradient(135deg, #b991bf, #9d6fa3); color: white; box-shadow: 0 4px 12px rgba(185, 145, 191, 0.4); }
+        .sidebar-footer { font-size: 10.5px; color: #aaa; text-align: center; font-weight: 500; }
 
-        main { margin-left: 240px; flex: 1; padding: 30px; max-width: 900px; }
-        .page-title { text-align: center; font-size: 44px; font-weight: bold; color: #f2e479; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); margin-bottom: 25px; }
-        .card { background-color: #ffffff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 20px; }
-        .card h3 { font-size: 17px; font-weight: bold; color: #333; margin-bottom: 15px; }
+        main { margin-left: 255px; flex: 1; padding: 10px 20px; max-width: 900px; }
+        .page-title { text-align: center; font-size: 48px; font-weight: 800; color: #f2e479; text-shadow: 2px 3px 6px rgba(0,0,0,0.25); margin-bottom: 25px; }
         
-        .event-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; background-color: #faf5fc; border: 1px solid #f0e1f5; border-radius: 10px; margin-bottom: 10px; }
-        .event-item.completed { background-color: #f9f9f9; border-color: #eee; opacity: 0.6; text-decoration: line-through; }
-        .event-left { display: flex; align-items: center; gap: 12px; }
-        .event-left input[type="checkbox"] { width: 18px; height: 18px; accent-color: #b991bf; cursor: pointer; }
-        .del-btn { background: none; border: none; color: #aaa; cursor: pointer; font-size: 12px; }
-        .del-btn:hover { color: #ff4d4d; }
+        .card { 
+            background-color: #ffffff; border-radius: 20px; padding: 24px; 
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-bottom: 20px; 
+            border-left: 5px solid #b991bf;
+        }
+        .card h3 { font-size: 18px; font-weight: 700; color: #4a3e4e; margin-bottom: 16px; }
         
-        .form-group { display: grid; grid-template-columns: 2fr 1.5fr 1fr; gap: 10px; margin-top: 15px; }
-        .form-group input { padding: 10px 14px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Sarabun', sans-serif; font-size: 14px; outline: none; }
-        .submit-btn { background-color: #b991bf; color: white; border: none; border-radius: 10px; font-family: 'Sarabun', sans-serif; font-weight: 600; cursor: pointer; }
+        .event-item { 
+            display: flex; align-items: center; justify-content: space-between; 
+            padding: 14px 18px; background-color: #fdf8fe; border: 1.5px solid #f2e3f5; 
+            border-radius: 14px; margin-bottom: 12px; transition: all 0.2s;
+        }
+        .event-item:hover { border-color: #b991bf; background-color: #faf0fc; }
+        .event-item.completed { background-color: #f8f8f8; border-color: #eee; opacity: 0.55; text-decoration: line-through; }
+        .event-left { display: flex; align-items: center; gap: 14px; }
+        .event-left input[type="checkbox"] { width: 20px; height: 20px; accent-color: #8e5296; cursor: pointer; }
+        .del-btn { background: #ffeef0; border: none; color: #e53e3e; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; }
+        .del-btn:hover { background: #fed7d7; }
+        
+        .form-group { display: grid; grid-template-columns: 2fr 1.5fr 1fr; gap: 12px; margin-top: 15px; }
+        .form-group input { padding: 12px 16px; border: 1.5px solid #e2d2e5; border-radius: 12px; font-family: 'Sarabun', sans-serif; font-size: 14px; outline: none; }
+        .form-group input:focus { border-color: #8e5296; box-shadow: 0 0 0 3px rgba(142, 82, 150, 0.15); }
+        .submit-btn { background: linear-gradient(135deg, #b991bf, #9d6fa3); color: white; border: none; border-radius: 12px; font-family: 'Sarabun', sans-serif; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
         .submit-btn:hover { opacity: 0.9; }
+
+        @media(max-width: 768px) {
+            body { flex-direction: column; padding: 10px; }
+            aside { position: relative; width: 100%; min-width: 100%; height: auto; top: 0; left: 0; bottom: 0; margin-bottom: 15px; }
+            main { margin-left: 0; padding: 0; }
+            .form-group { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -70,28 +71,28 @@
     <aside>
         <div>
             <div class="sidebar-header">
-                <h1>DEK 70 PLANNER</h1>
-                <p>สู้ไปด้วยกันนะว่าที่คุณหมอ/เภสัช!</p>
+                <h1>✨ DEK 70 PLANNER</h1>
+                <p>สู้ไปด้วยกันนะว่าที่คุณหมอ/เภสัช! 💊💙</p>
             </div>
             <nav>
-                <a href="index.html" class="nav-btn">🏠 หน้าแรก</a>
-                <a href="calendar.html" class="nav-btn active">📅 ปฏิทินและกิจกรรม</a>
-                <a href="info.html" class="nav-btn">💊 ข้อมูลคณะและคะแนน</a>
-                <a href="files.html" class="nav-btn">📚 หนังสือและไฟล์เรียน</a>
+                <a href="index.html" class="nav-btn"><span>🏠</span> หน้าแรก</a>
+                <a href="calendar.html" class="nav-btn active"><span>📅</span> ปฏิทินและกิจกรรม</a>
+                <a href="info.html" class="nav-btn"><span>💊</span> ข้อมูลคณะและคะแนน</a>
+                <a href="files.html" class="nav-btn"><span>📚</span> หนังสือและไฟล์เรียน</a>
             </nav>
         </div>
-        <div class="sidebar-footer">Target: DEK 70 Admission</div>
+        <div class="sidebar-footer">🎯 Target: DEK 70 Admission</div>
     </aside>
 
     <main>
         <h2 class="page-title">ปฏิทินกิจกรรม</h2>
 
         <div class="card">
-            <h3>ไทม์ไลม์กำหนดการเตรียมตัวสอบ</h3>
+            <h3>📌 ไทม์ไลน์กำหนดการเตรียมตัวสอบ</h3>
             <div id="event-list"></div>
 
-            <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
-                <h4 style="font-size: 14px; font-weight: bold; color: #444; margin-bottom: 10px;">➕ เพิ่มกิจกรรมหรือกำหนดการใหม่</h4>
+            <div style="margin-top: 25px; border-top: 2px dashed #f0e1f5; padding-top: 20px;">
+                <h4 style="font-size: 15px; font-weight: 700; color: #5a455e; margin-bottom: 12px;">➕ เพิ่มกิจกรรมหรือกำหนดการใหม่</h4>
                 <form id="add-event-form" onsubmit="addNewEvent(event)" class="form-group">
                     <input type="text" id="event-name" placeholder="ชื่อกิจกรรม (เช่น สอบกลางภาค)" required>
                     <input type="date" id="event-date" required>
@@ -131,8 +132,8 @@
                         <div class="event-left">
                             <input type="checkbox" ${ev.completed ? 'checked' : ''} onclick="toggleEvent(${index})">
                             <div>
-                                <p style="font-weight:600; font-size:14px;">${ev.name}</p>
-                                <p style="font-size:11px; color:#666;">${formattedDate}</p>
+                                <p style="font-weight:700; font-size:14.5px; color:#4a3e4e;">${ev.name}</p>
+                                <p style="font-size:11.5px; color:#888;">📅 ${formattedDate}</p>
                             </div>
                         </div>
                         <button onclick="deleteEvent(${index})" class="del-btn">ลบ</button>
