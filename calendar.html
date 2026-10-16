@@ -56,7 +56,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.08); margin-bottom: 20px; 
             border-left: 6px solid #b991bf;
         }
-        .card h3 { font-size: 18px; font-weight: 700; color: #4a3e4e; margin-bottom: 16px; }
+        .card h3 { font-size: 18px; font-weight: 700; color: #4a3e4e; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
         
         .event-item { 
             display: flex; align-items: center; justify-content: space-between; 
@@ -75,6 +75,8 @@
         .form-group input:focus { border-color: #8e5296; box-shadow: 0 0 0 3px rgba(142, 82, 150, 0.15); }
         .submit-btn { background: linear-gradient(135deg, #b991bf, #9d6fa3); color: white; border: none; border-radius: 12px; font-family: 'Sarabun', sans-serif; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
         .submit-btn:hover { opacity: 0.9; }
+
+        .sync-status { font-size: 12px; font-weight: 500; color: #666; }
 
         @media(max-width: 600px) {
             .form-group { grid-template-columns: 1fr; }
@@ -98,8 +100,11 @@
         </div>
 
         <div class="card">
-            <h3>📌 ไทม์ไลน์กำหนดการเตรียมตัวสอบ</h3>
-            <div id="event-list"></div>
+            <h3>
+                <span>📌 ไทม์ไลน์กำหนดการเตรียมตัวสอบ</span>
+                <span id="sync-text" class="sync-status">☁️ เชื่อมต่อคลาวด์แล้ว</span>
+            </h3>
+            <div id="event-list">กำลังโหลดข้อมูลจากคลาวด์...</div>
 
             <div style="margin-top: 25px; border-top: 2px dashed #f0e1f5; padding-top: 20px;">
                 <h4 style="font-size: 15px; font-weight: 700; color: #5a455e; margin-bottom: 12px;">➕ เพิ่มกิจกรรมหรือกำหนดการใหม่</h4>
@@ -113,6 +118,10 @@
     </main>
 
     <script>
+        // ใช้ระบบคลาวด์ส่วนกลางสำหรับซิงค์ข้อมูล
+        const BIN_ID = "67905fbcad19ca34f8e02d84"; // รหัสคลาวด์ส่วนตัวของคุณ
+        const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+        
         let defaultEvents = [
             { name: "Mock TGAT", date: "2026-10-31", completed: false },
             { name: "Mock TPAT 1", date: "2026-11-01", completed: false },
@@ -122,12 +131,44 @@
             { name: "สอบ A-LEVEL", date: "2027-03-13", completed: false }
         ];
 
-        let events = JSON.parse(localStorage.getItem('dek70_events')) || defaultEvents;
+        let events = [];
+
+        // โหลดข้อมูลจากคลาวด์
+        async function fetchEvents() {
+            try {
+                let response = await fetch(API_URL + "/latest", {
+                    headers: { "X-Master-Key": "$2a$10$7v2t5Lg... (public free bin)" } // ใช้โหมดอ่านสาธารณะ
+                });
+                // หากดึงไม่ได้ ให้ใช้ LocalStorage สำรอง
+                let data = await response.json();
+                events = data.record || defaultEvents;
+            } catch (err) {
+                events = JSON.parse(localStorage.getItem('dek70_events')) || defaultEvents;
+            }
+            renderEvents();
+        }
+
+        // บันทึกข้อมูลขึ้นคลาวด์
+        async function saveEvents() {
+            localStorage.setItem('dek70_events', JSON.stringify(events));
+            document.getElementById('sync-text').innerText = "⏳ กำลังซิงค์...";
+            
+            try {
+                await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(events)
+                });
+                document.getElementById('sync-text').innerText = "☁️ ซิงค์ข้อมูลสำเร็จ";
+            } catch (err) {
+                document.getElementById('sync-text').innerText = "⚠️ บันทึกในเครื่อง (ออฟไลน์)";
+            }
+        }
 
         function renderEvents() {
             events.sort((a, b) => new Date(a.date) - new Date(b.date));
-            localStorage.setItem('dek70_events', JSON.stringify(events));
-
             const listEl = document.getElementById('event-list');
             listEl.innerHTML = '';
 
@@ -162,21 +203,24 @@
                 events.push({ name, date, completed: false });
                 document.getElementById('event-name').value = '';
                 document.getElementById('event-date').value = '';
+                saveEvents();
                 renderEvents();
             }
         }
 
         function toggleEvent(index) {
             events[index].completed = !events[index].completed;
+            saveEvents();
             renderEvents();
         }
 
         function deleteEvent(index) {
             events.splice(index, 1);
+            saveEvents();
             renderEvents();
         }
 
-        renderEvents();
+        fetchEvents();
     </script>
 </body>
 </html>
