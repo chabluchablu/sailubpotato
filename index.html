@@ -30,5 +30,166 @@
         .nav-btn.active { background: linear-gradient(135deg, #b991bf, #9d6fa3); color: white; box-shadow: 0 4px 12px rgba(185, 145, 191, 0.4); }
         .sidebar-footer { font-size: 10.5px; color: #aaa; text-align: center; font-weight: 500; }
 
-        main { margin-left: 255px; flex: 1;
-              
+        main { margin-left: 255px; flex: 1; padding: 10px 20px; max-width: 950px; }
+        .page-title { text-align: center; font-size: 48px; font-weight: 800; color: #f2e479; text-shadow: 2px 3px 6px rgba(0,0,0,0.25); margin-bottom: 25px; letter-spacing: 1px; }
+        
+        .card { 
+            background-color: #ffffff; border-radius: 20px; padding: 22px; 
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-bottom: 20px; 
+            transition: transform 0.2s; border-left: 5px solid #b991bf;
+        }
+        .card:hover { transform: translateY(-2px); }
+        .card h3 { font-size: 18px; font-weight: 700; color: #4a3e4e; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+        .grid-cols-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+        
+        .countdown-box { 
+            background: linear-gradient(145deg, #ffffff, #fdf8fe); 
+            border: 1.5px solid #f0e1f5; border-radius: 16px; padding: 16px; text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .countdown-box p:first-child { font-weight: 700; color: #6b4c72; font-size: 15px; }
+        .countdown-box p:nth-child(2) { font-size: 11px; color: #999; margin-bottom: 8px; }
+        .countdown-num { font-size: 21px; font-weight: 800; color: #8e5296; background: #f5e8f7; padding: 6px 10px; border-radius: 10px; display: inline-block; width: 100%; }
+        
+        .action-btn { 
+            display: block; width: 100%; padding: 10px; background-color: #f7f2f8; 
+            border: 1px solid #ebdcf0; border-radius: 12px; font-family: 'Sarabun', sans-serif; 
+            font-weight: 700; color: #8e5296; cursor: pointer; margin-top: 15px; 
+            text-align: center; text-decoration: none; transition: all 0.2s; font-size: 13px; 
+        }
+        .action-btn:hover { background-color: #b991bf; color: white; border-color: #b991bf; }
+
+        @media(max-width: 768px) {
+            body { flex-direction: column; padding: 10px; }
+            aside { position: relative; width: 100%; min-width: 100%; height: auto; top: 0; left: 0; bottom: 0; margin-bottom: 15px; }
+            main { margin-left: 0; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <div>
+            <div class="sidebar-header">
+                <h1>✨ DEK 70 PLANNER</h1>
+                <p>สู้ไปด้วยกันนะว่าที่คุณหมอ/เภสัช! 💊💙</p>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-btn active"><span>🏠</span> หน้าแรก</a>
+                <a href="calendar.html" class="nav-btn"><span>📅</span> ปฏิทินและกิจกรรม</a>
+                <a href="info.html" class="nav-btn"><span>💊</span> ข้อมูลคณะและคะแนน</a>
+                <a href="files.html" class="nav-btn"><span>📚</span> หนังสือและไฟล์เรียน</a>
+            </nav>
+        </div>
+        <div class="sidebar-footer">🎯 Target: DEK 70 Admission</div>
+    </aside>
+
+    <main>
+        <h2 class="page-title">Dek70</h2>
+
+        <div class="card">
+            <h3>⏳ นับถอยหลังวันสอบ</h3>
+            <div class="grid-3">
+                <div class="countdown-box">
+                    <p>TGAT</p>
+                    <p>30 ม.ค. 2570</p>
+                    <p id="countdown-tgat" class="countdown-num">กำลังคำนวณ...</p>
+                </div>
+                <div class="countdown-box">
+                    <p>TPAT 1</p>
+                    <p>13 ก.พ. 2570</p>
+                    <p id="countdown-tpat1" class="countdown-num">กำลังคำนวณ...</p>
+                </div>
+                <div class="countdown-box">
+                    <p>A-LEVEL</p>
+                    <p>13 มี.ค. 2570</p>
+                    <p id="countdown-alevel" class="countdown-num">กำลังคำนวณ...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-cols-3">
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>📌 กิจกรรมที่ใกล้จะถึง</h3>
+                    <div id="nearest-event-box" style="font-size: 13.5px; color: #555; padding: 6px 0;">กำลังโหลด...</div>
+                </div>
+                <a href="calendar.html" class="action-btn">ดูกิจกรรมทั้งหมด &rarr;</a>
+            </div>
+
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>💊 มหาลัยและคณะ</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.5;">รวบรวมเว็บไซต์ คะแนนสูงสุด ต่ำสุด และข้อมูลคณะเภสัชฯ ที่สนใจ</p>
+                </div>
+                <a href="info.html" class="action-btn">ดูข้อมูลคณะ &rarr;</a>
+            </div>
+
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>📚 หนังสือและไฟล์เรียน</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.5;">แหล่งรวมไดร์ฟเอกสาร สสวท., เคมี, เลข, อังกฤษ และข้อสอบเก่า</p>
+                </div>
+                <a href="files.html" class="action-btn">เปิดคลังไฟล์ &rarr;</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function updateCountdowns() {
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+
+            const tgatDate = new Date(2027, 0, 30);
+            const tpat1Date = new Date(2027, 1, 13);
+            const alevelDate = new Date(2027, 2, 13);
+
+            document.getElementById('countdown-tgat').innerText = getDaysRemaining(tgatDate, now);
+            document.getElementById('countdown-tpat1').innerText = getDaysRemaining(tpat1Date, now);
+            document.getElementById('countdown-alevel').innerText = getDaysRemaining(alevelDate, now);
+        }
+
+        function getDaysRemaining(targetDate, now) {
+            const diffTime = targetDate.getTime() - now.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays > 0) return `อีก ${diffDays} วัน`;
+            if (diffDays === 0) return `สอบวันนี้! 🔥`;
+            return `สอบแล้ว`;
+        }
+
+        function loadNearestEvent() {
+            let defaultEvents = [
+                { name: "Mock TGAT", date: "2026-10-31", completed: false },
+                { name: "Mock TPAT 1", date: "2026-11-01", completed: false },
+                { name: "สมัคร TGAT", date: "2026-11-04", completed: false },
+                { name: "สอบ TGAT", date: "2027-01-30", completed: false },
+                { name: "สอบ TPAT 1", date: "2027-02-13", completed: false },
+                { name: "สอบ A-LEVEL", date: "2027-03-13", completed: false }
+            ];
+            let events = JSON.parse(localStorage.getItem('dek70_events')) || defaultEvents;
+            events.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            let today = new Date();
+            today.setHours(0,0,0,0);
+            let nearestText = "ไม่มีกิจกรรมที่ใกล้จะถึง";
+
+            for (let ev of events) {
+                let parts = ev.date.split('-');
+                let evDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                if (evDate >= today && !ev.completed) {
+                    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    let dateStr = evDate.toLocaleDateString('th-TH', options);
+                    nearestText = `<div style="background:#f9f2fb; padding:10px 12px; border-radius:12px; border:1px solid #ebdcf0;"><strong style="color:#6b4c72;">${ev.name}</strong><br><span style="color:#8e5296; font-size:12px;">📅 ${dateStr}</span></div>`;
+                    break;
+                }
+            }
+            document.getElementById('nearest-event-box').innerHTML = nearestText;
+        }
+
+        updateCountdowns();
+        loadNearestEvent();
+    </script>
+</body>
+</html>
