@@ -9,66 +9,35 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Sarabun', sans-serif; background-color: #b991bf; color: #333; display: flex; min-height: 100vh; padding: 20px; }
         
-        /* แถบเมนูลอยขนาดจิ๋วฝั่งซ้ายมือ ล็อคติดจอเสมอ */
         aside { 
-            width: 65px; 
-            min-width: 65px; 
-            background-color: #ffffff; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
-            position: fixed; 
-            top: 50%; 
-            left: 15px; 
-            transform: translateY(-50%); 
-            border-radius: 30px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding: 20px 0; 
-            z-index: 9999; 
-            border: 2px solid #f3e8f4;
+            width: 65px; min-width: 65px; background-color: #ffffff; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); position: fixed; 
+            top: 50%; left: 15px; transform: translateY(-50%); border-radius: 30px; 
+            display: flex; flex-direction: column; align-items: center; padding: 20px 0; 
+            z-index: 9999; border: 2px solid #f3e8f4;
         }
         
-        .sidebar-logo { font-size: 20px; margin-bottom: 20px; cursor: default; }
+        .sidebar-logo { font-size: 16px; margin-bottom: 20px; color: #8e5296; font-weight: bold; cursor: default; }
 
         nav { display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: center; }
         
         .nav-btn { 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 20px; 
-            color: #666; 
-            text-decoration: none; 
-            transition: all 0.25s ease; 
-            position: relative;
-            background-color: #fcf8fd;
+            width: 45px; height: 45px; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 20px; 
+            color: #666; text-decoration: none; transition: all 0.25s ease; 
+            position: relative; background-color: #fcf8fd;
         }
         .nav-btn:hover { background-color: #f0e1f5; transform: scale(1.1); }
         .nav-btn.active { background: linear-gradient(135deg, #b991bf, #9d6fa3); color: white; box-shadow: 0 4px 12px rgba(185, 145, 191, 0.5); }
 
-        /* ข้อความขึ้นเวลาเอาเมาส์ชี้ (Tooltip) */
         .nav-btn::after {
-            content: attr(data-title);
-            position: absolute;
-            left: 58px;
-            background-color: #4a3e4e;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            content: attr(data-title); position: absolute; left: 58px; 
+            background-color: #4a3e4e; color: white; padding: 5px 12px; 
+            border-radius: 8px; font-size: 12px; font-weight: 600; white-space: nowrap; 
+            opacity: 0; pointer-events: none; transition: opacity 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
         .nav-btn:hover::after { opacity: 1; }
 
-        /* พื้นที่เนื้อหาขยับหลบเมนูลอยซ้าย */
         main { margin-left: 80px; flex: 1; padding: 10px 15px; max-width: 950px; }
         .page-title { text-align: center; font-size: 48px; font-weight: 800; color: #f2e479; text-shadow: 2px 3px 6px rgba(0,0,0,0.25); margin-bottom: 25px; letter-spacing: 1px; }
         
@@ -103,9 +72,8 @@
 </head>
 <body>
 
-    <!-- แถบเมนูลอยขนาดจิ๋วทางซ้าย -->
     <aside>
-        <div class="sidebar-logo">✨</div>
+        <div class="sidebar-logo">D70</div>
         <nav>
             <a href="index.html" class="nav-btn active" data-title="หน้าแรก">🏠</a>
             <a href="calendar.html" class="nav-btn" data-title="ปฏิทินและกิจกรรม">📅</a>
